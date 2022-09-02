@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+<table style="margin-top: 50px" class="table table-dark">
+    <form action="/add/{{ project_name }}/{{ package_type }}" method="post" enctype="multipart/form-data">
+        <label>
+            <input type="text" name="package_name">
+            <input type="submit" class="btn btn-primary" style="margin-top: 15px">
+        </label>
+    </form>
+    <thead>
+    <tr>
+        <th scope="col">Package</th>
+        <th scope="col">Current Version</th>
+        <th scope="col">Last Version</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for data in datas %}
+        <tr>
+            <td><a href={{ links[package_type]+datas[data] }}>{{ datas[data] }} </a></td>
+            <td>{{ data.current_version }}</td>
+            <td>{{ data.last_version }}</td>
+            {% if data.current_version == data.last_version %}
+            <td>Update Not Required</td>
+            {% else %}
+            <td>Update Required</td>
+            {% endif %}
+            <td><a href="/delete/{{ data.project_name }}/{{ data.package_id }}" class="btn btn-danger">Sil</a></td>
+        </tr>
+
+    {% endfor %}
+
+
+    </tbody>
+</table>
+
+
+</body>
+</html>
