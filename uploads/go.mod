@@ -1,3 +1,11 @@
+module webhose-go
+
+go 1.17
+
+require (
+ github.com/jackc/pgx/v4 v4.14.1
+ github.com/jinzhu/now v1.1.4
+ github.com/labstack/echo/v4 v4.6.1
  github.com/microcosm-cc/bluemonday v1.0.18
  github.com/sirupsen/logrus v1.8.1
  github.com/spf13/viper v1.9.0

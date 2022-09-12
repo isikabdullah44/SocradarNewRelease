@@ -28,3 +28,13 @@ def node_package_search(package_name):
     json_data = json.loads(response.text)
     last_version = json_data['latest']
     return last_version
+
+
+def node_all_versions_of_packages(package_name):
+    response = requests.get(f'https://registry.npmjs.org/{package_name}')
+    json_data = json.loads(response.text)
+    total_versions = []
+    for versions in json_data['versions']:
+        total_versions.append(versions)
+    jsonStr = json.dumps(total_versions)
+    return jsonStr

@@ -18,6 +18,7 @@ def read_file(file_name, project_name):
             if len(data[x]) > 2:
                 package_name = data[x][1]
                 package_version = data[x][2]
+                package_version = package_version.replace("\n", "")
                 current_versions_of_packages[package_name] = package_version
                 x += 1
             elif x < len(data) - 1:
@@ -41,3 +42,10 @@ def go_package_search(package_name):
     return last_version
 
 
+def go_all_versions_of_packages(package_name):
+    response = requests.get(f"https://proxy.golang.org/{package_name}/@v/list")
+    versions = response.text.split('\n')
+    versions.remove("")
+    sorted_versions = sorted(versions)
+    jsonStr = json.dumps(sorted_versions)
+    return jsonStr

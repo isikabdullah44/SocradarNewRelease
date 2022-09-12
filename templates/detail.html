@@ -11,7 +11,7 @@
 </head>
 <body>
 <table style="margin-top: 50px" class="table table-dark">
-    <form action="/add/{{ project_name }}/{{ package_type }}" method="post" enctype="multipart/form-data">
+    <form action="/add/{{ user_id }}/{{ project_name }}/{{ package_type }}" method="post" enctype="multipart/form-data">
         <label>
             <input type="text" name="package_name">
             <input type="submit" class="btn btn-primary" style="margin-top: 15px">
@@ -30,15 +30,22 @@
     <tbody>
     {% for data in datas %}
         <tr>
-            <td><a href={{ links[package_type]+datas[data] }}>{{ datas[data] }} </a></td>
-            <td>{{ data.current_version }}</td>
+            <td><a href={{ links[package_type]+datas[data].package_name }}>{{ datas[data].package_name }} </a></td>
+            <td><select name="" id="">{{ data.last_version }}
+                {% for version in versions_dict[data] %}
+                    <option value="node">{{ version }}</option>
+                {% endfor %}
+
+            </select></td>
             <td>{{ data.last_version }}</td>
+
             {% if data.current_version == data.last_version %}
-            <td>Update Not Required</td>
+                <td>Update Not Required</td>
             {% else %}
-            <td>Update Required</td>
+                <td>Update Required</td>
             {% endif %}
-            <td><a href="/delete/{{ data.project_name }}/{{ data.package_id }}" class="btn btn-danger">Sil</a></td>
+            <td><a href="/delete/{{ data.user_id }}/{{ data.project_name }}/{{ data.package_id }}"
+                   class="btn btn-danger">Sil</a></td>
         </tr>
 
     {% endfor %}

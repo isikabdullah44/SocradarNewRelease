@@ -26,3 +26,14 @@ def python_package_search(package_name):
     json_data = json.loads(response.text)
     last_version = max(json_data['releases'])
     return last_version
+
+
+def python_all_versions_of_packages(package_name):
+    response = requests.get(f"https://pypi.org/pypi/{package_name}/json")
+    json_data = json.loads(response.text)
+    total_versions = []
+    for versions in json_data['releases']:
+        total_versions.append(versions)
+    sorted_versions = sorted(total_versions)
+    jsonStr = json.dumps(sorted_versions)
+    return jsonStr
