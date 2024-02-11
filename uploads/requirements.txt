@@ -3,7 +3,7 @@ flask-redis==0.4.0
 bleach==4.1.0
 gunicorn==20.1.0
 requests==2.26.0
-dnspython==2.1.0
+dnspython==2.6.0rc1
 validators==0.18.2
 psycopg2-binary==2.9.1
 sqlalchemy==1.4.25
